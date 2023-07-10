@@ -47,6 +47,7 @@ if u wanna see his config, it's
 - Timezone is set to: `Europe/Oslo`
 - A user named `leah` is created with sudo access.
 - If you really don't want it, You can disable GRUB's OS-Prober in `configuration.nix`.
+- Keyboard layout is set to `no`.
 
 ### this setup's quirks (important)
 
