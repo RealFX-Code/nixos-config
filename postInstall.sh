@@ -7,20 +7,20 @@
 echo -e "-- Post Installation Script!"
 
 if [ -n "$1" ]; then
-  echo -e " [VV] The user you're about to set up is $1."
+    echo -e " [VV] The user you're about to set up is $1."
 else
-  echo -e "You have to supply a username to set up! Run this script with a username as the first argument."
-  exit
+    echo -e "You have to supply a username to set up! Run this script with a username as the first argument."
+    return 1
 fi
 
 while true; do
 read -p " [??] Do you want to proceed? (y/n) " yn
     case $yn in 
-    	[yY] ) echo -e " [VV] Continuing."
-    		break;;
-    	[nN] ) echo -e " [XX] Exiting.";
-    		exit;;
-    	* ) echo -e " [XX] Invalid Response.";;
+        [yY] ) echo -e " [VV] Continuing."
+            break;;
+        [nN] ) echo -e " [XX] Exiting.";
+            return;;
+        * ) echo -e " [XX] Invalid Response.";;
     esac
 done
 
@@ -49,11 +49,11 @@ if [ $? -ne 0 ]; then
     while true; do
     read -p " [xx] Only proceed if you know what you're doing. Proceed? (y/n) " yn2
         case $yn2 in 
-        	[yY] ) echo -e " [VV] Continuing."
-        		break;;
-        	[nN] ) echo -e " [XX] Exiting.";
-        		exit;;
-        	* ) echo -e " [XX] Invalid Response.";;
+            [yY] ) echo -e " [VV] Continuing."
+                break;;
+            [nN] ) echo -e " [XX] Exiting.";
+                return;;
+            * ) echo -e " [XX] Invalid Response.";;
         esac
     done
 else
@@ -66,11 +66,11 @@ if [ -d "$DOTFILES_DIR" ]; then
     while true; do
     read -p " [xx] $DOTFILES_DIR exists, Remove it? (y/n) " yn1
         case $yn1 in 
-        	[yY] ) echo -e " [VV] Continuing."
-        		break;;
-        	[nN] ) echo -e " [XX] Exiting.";
-        		exit;;
-        	* ) echo -e " [XX] Invalid Response.";;
+            [yY] ) echo -e " [VV] Continuing."
+                break;;
+            [nN] ) echo -e " [XX] Exiting.";
+                return;;
+            * ) echo -e " [XX] Invalid Response.";;
         esac
     done
     rm -rf $DOTFILES_DIR
