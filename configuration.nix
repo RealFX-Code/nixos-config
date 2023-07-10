@@ -19,8 +19,7 @@
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.support32Bit = true;
 
-  imports =
-  [ # Include the results of the hardware scan.
+  imports = [
     ./hardware-configuration.nix
   ];
 
@@ -51,50 +50,50 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.leah = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" "libvirtd" "kvm" ]; # Enable ‘sudo’ for the user.
+    isNormalUser = true;
+    extraGroups = [ "wheel" "libvirtd" "kvm" ]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
-	  wget
-	  neovim
-	  starship
-	  brave
-	  cargo
-	  dunst
-	  flameshot
+    wget
+    neovim
+    starship
+    brave
+    cargo
+    dunst
+    flameshot
     fontconfig
     freetype
-	  gcc
-	  gh
-	  git
-	  github-desktop
-	  gnugrep
-	  gnumake
+    gcc
+    gh
+    git
+    github-desktop
+    gnugrep
+    gnumake
     fdisk
-	  kitty
+    kitty
     luarocks
     libvirt
-	  neovim
-	  ninja
-	  nodejs
-	  feh
-	  pavucontrol
-	  polkit_gnome
-	  python3Full
-	  python.pkgs.pip
-	  qemu
-	  terminus-nerdfont
-	  tldr
-	  trash-cli
-	  unzip
-	  variety
-	  virt-manager
-	  xdg-desktop-portal-gtk
-	  xfce.thunar
+    neovim
+    ninja
+    nodejs
+    feh
+    pavucontrol
+    polkit_gnome
+    python3Full
+    python.pkgs.pip
+    qemu
+    terminus-nerdfont
+    tldr
+    trash-cli
+    unzip
+    variety
+    virt-manager
+    xdg-desktop-portal-gtk
+    xfce.thunar
 
     # my packages
     google-chrome # yes i use chrome :D
@@ -181,6 +180,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
-
 }
-
