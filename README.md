@@ -2,7 +2,6 @@
 
 I love nixos, it's great. i want to use it, but to use it i have to have a configuration. (which will be in this repo)
 
-I wouldn't recommend this repo towards anyone just starting out with nix, i would advise to try installing Nix atleast once in a VM and get familiar with the concept of a single config file for everything.
 
 - [My NixOS configuration!](#my-nixos-configuration)
   - [many many thanks to Chris Titus](#many-many-thanks-to-chris-titus)
@@ -21,7 +20,7 @@ if u wanna see his config, it's
 
 ## installation
 
-(assuming you followed the [NixOS Instllation Manual](https://nixos.org/manual/nixos/stable/index.html#sec-installation-manual-installing) up until "Installing" point 4)
+(assuming you followed the [NixOS Installation Manual](https://nixos.org/manual/nixos/stable/index.html#sec-installation-manual-installing) up until "Installing" point 4)
 
 - Generate NixOS Config using `nixos-generate-config --root /mnt`
   - This is important to generate the Hardware Configuration (`hardware-configuration.nix`) as this is machine-specific and won't be included in this repo.
@@ -30,12 +29,12 @@ if u wanna see his config, it's
 - Install NixOS with `nixos-install`
 - Finish setup with the script (in this repo) named `postInstall.sh` while passing 1 argument which is the username to set up.
   - This copies my dotfiles to the directory of the specified user.
-  - Run it as such:
+  - Example for setting up the user "leah":
     - `$ ./postInstall.sh leah`
-- Reboot system using `reboot now`
-- Log into root account you set a password to when you ran `nixos-install`
+- Reboot your system using `reboot now`
+- Log into your `root` account using the password you set when you ran `nixos-install`
 - Set the password for your unpriviliged account using `passwd <user>` where `<user>` is the username of the account you set up.
-- It is important to give your user account ownership of your home folder using the following command : `chown -R <user>:users /home/<user>`.
+- It is important to give your user account ownership of your home folder using the following command: `chown -R <user>:users /home/<user>`.
 - Done! You can now log out of your root account by simply typing `exit` and start using NixOS!
 - **note:** you might want to change the default of your user to `zsh` or any other shell you prefer.
 
