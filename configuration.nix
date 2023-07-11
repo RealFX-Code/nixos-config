@@ -2,17 +2,6 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running "nixos-help").
 
-# TODO: proper implementation of all software... E.G.:
-# programs.zsh.enable = true;
-# programs.sway = {
-#   enable = true;
-#   wrapperFeatures.gtk = true;
-# }
-#
-# ref this: https://nixos.wiki/wiki/Sway
-
-# TODO: Remove whatever packages require outdated/insecure packages. See line: 128 -> 131. 
-
 { config, pkgs, lib, ... }:
 
 {
