@@ -1,11 +1,5 @@
 # todos!
 
-## Global
-
-### Make example for having a seperate home partition.
-
-Also figure out how to make a serperate home parition in the first place.
-
 ## configuration.nix
 
 ### Properly integrate some software that support the `programs.{...} = { enable = true;}` implementation type.
