@@ -99,4 +99,6 @@ mkdir -p $HOME_DIR/.local/bin
 
 cp $SCRIPTS_DIR/* $HOME_DIR/.local/bin/
 
+chmod +x $HOME_DIR/.local/bin/startSway
+
 echo -e " [!!] You've successfully installed NixOS! You can now reboot."
