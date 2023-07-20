@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# TODO: add check for running under NixOS
-
 # Welcome and ability to bail
 
 echo -e "-- Post Installation Script!"
