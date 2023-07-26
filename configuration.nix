@@ -19,6 +19,7 @@
   boot.loader.grub.device = "nodev";
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.useOSProber = true;
+  boot.loader.grub.default = "2";
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "leah-nixos"; # Define your hostname.
@@ -32,7 +33,7 @@
   console = {
     packages=[ pkgs.terminus_font ];
     font="${pkgs.terminus_font}/share/consolefonts/ter-i22b.psf.gz";
-    keyMap="no"
+    keyMap="no";
   };
 
   # Enable sound.
@@ -42,11 +43,22 @@
   # Define a user account. Don't forget to set a password with "passwd".
   users.users.leah = {
     isNormalUser = true;
+    shell= pkgs.zsh;
     extraGroups = [ "wheel" "libvirtd" "kvm" ]; # Enable "sudo" for the user.
   };
 
+  fonts.fonts = with pkgs; [
+    (nerdfonts.override { fonts = ["JetBrainsMono"];})
+    font-awesome
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    terminus-nerdfont
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  programs.zsh.enable = true; # temp fix for zsh to be available as a default shell
   environment.systemPackages = with pkgs; [
     vim
     wget
@@ -64,7 +76,6 @@
     github-desktop
     gnugrep
     gnumake
-    fdisk
     kitty
     luarocks
     libvirt
@@ -89,13 +100,15 @@
     # my packages
     google-chrome # yes i use chrome :D
     hyfetch
+    bat
+    htop
+    btop
     wlroots
     wofi
     hyprland
     hyprpaper
     sway
     vulkan-validation-layers
-    waybar
     exa
     hollywood
     jetbrains-mono
@@ -108,16 +121,65 @@
     xwayland
     wayland
     bash
-    zsh
     egl-wayland
     foot
+    slurp
+    wl-clipboard
+    grim
+    discord
+    firefox # incase chrome breaks itself
+    cider # apple music :D
+    usbutils
+    networkmanagerapplet
+    vscode.fhs
+    yaru-theme
+    glib
   ];
+  
+  # dconf :D
+  programs.dconf.enable = true;
+
+  # Experimental support for Hyprland with Waybar
+  programs.waybar = {
+    enable = true;
+    package = pkgs.waybar.overrideAttrs(old: {
+      mesonFlags = (old.mesonFlags or []) ++ [ "-Dexperimental=true" ];
+      patches = (old.patches or []) ++ [
+        (pkgs.fetchpatch {
+          name = "fix waybar hyprctl";
+          url = "https://aur.archlinux.org/cgit/aur.git/plain/hyprctl.patch?h=waybar-hyprland-git";
+          sha256 = "sha256-pY3+9Dhi61Jo2cPnBdmn3NUTSA8bAbtgsk2ooj4y7aQ=";
+        })
+      ];
+    });
+  };  
+
+  # Set defualt browser
+  xdg.mime.enable = true;
+  xdg.mime.defaultApplications = {
+    "text/html" = "/home/leah/.local/bin/google-chrome";
+    "x-scheme-handler/http" = "/home/leah/.local/bin/google-chrome";
+    "x-scheme-handler/https" = "/home/leah/.local/bin/google-chrome";
+    "x-scheme-handler/about" = "/home/leah/.local/bin/google-chrome";
+    "x-scheme-handler/unknown" = "/home/leah/.local/bin/google-chrome";
+  };
+
+  environment.sessionVariables.DEFAULT_BROWSER = "/home/leah/.local/bin/google-chrome";
 
   # lord forgive me
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1u"
     "python-2.7.18.6"
   ];
+
+  # Fix for Electron apps to run under wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  # Enable SSH Remote Login
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = true;
+  };
 
   # List services that you want to enable:
   virtualisation.libvirtd.enable = true; 
@@ -161,7 +223,7 @@
   # accidentally delete configuration.nix.
   system.copySystemConfiguration = true;
   system.autoUpgrade.enable = true;  
-  system.autoUpgrade.allowReboot = true; 
+  system.autoUpgrade.allowReboot = false; 
   system.autoUpgrade.channel = "https://channels.nixos.org/nixos-23.05";
   
   # This value determines the NixOS release from which the default

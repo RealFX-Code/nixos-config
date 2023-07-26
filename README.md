@@ -36,7 +36,7 @@ if u wanna see his config, it's
 - Set the password for your unpriviliged account using `passwd <user>` where `<user>` is the username of the account you set up.
 - It is important to give your user account ownership of your home folder using the following command: `chown -R <user>:users /home/<user>`.
 - Done! You can now log out of your root account by simply typing `exit` and start using NixOS!
-- **note:** you might want to change the default of your user to `zsh` or any other shell you prefer.
+- NOTE: My wrapper scripts have moved to my dotfiles repo.
 
 ### things you might want to change to your specific setup
 

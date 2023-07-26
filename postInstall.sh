@@ -82,21 +82,12 @@ if [ "$(uname -o)" = "Msys" ]; then
     echo -e " [!!] Msys detected, not running dotfiles install script for your own safety."
 else
     echo -e " [..] Installing dotfiles for: Hyprland, Hyprpaper, i3, Kitty, Rofi, Sway, Waybar, and Wofi."
-    cp -R $DOTFILES_DIR/Linux/.config $HOME_DIR
-    cp -r $DOTFILES_DIR/Linux/Pictures $HOME_DIR
-    cp $DOTFILES_DIR/Linux/.zshrc $HOME_DIR/.zshrc
-    cp $DOTFILES_DIR/Linux/.profile $HOME_DIR/.profile
+    # cp -R $DOTFILES_DIR/Linux/.config $HOME_DIR
+    # cp -r $DOTFILES_DIR/Linux/Pictures $HOME_DIR
+    # cp $DOTFILES_DIR/Linux/.zshrc $HOME_DIR/.zshrc
+    # cp $DOTFILES_DIR/Linux/.profile $HOME_DIR/.profile
+    # TODO: fix dotfiles
+    echo -e " [!!] not installing dotfiles, they r broken. Install them yourself later."
 fi
-
-# Wrapper scripts
-
-echo -e " [..] Installing wrapper-scripts"
-
-mkdir -p $HOME_DIR/.local
-mkdir -p $HOME_DIR/.local/bin
-
-cp $SCRIPTS_DIR/* $HOME_DIR/.local/bin/
-
-chmod +x $HOME_DIR/.local/bin/startSway
 
 echo -e " [!!] You've successfully installed NixOS! You can now reboot."
