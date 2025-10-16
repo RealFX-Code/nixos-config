@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, frostix, ... }:
 
 {
   imports =
@@ -46,8 +46,6 @@
   # Configure console keymap
   console.keyMap = "no";
 
-  users.defaultUserShell = pkgs.bash;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.leah = {
     isNormalUser = true;
@@ -75,11 +73,17 @@
     floorp
     hyfetch
     vesktop
+    git-repo
     fastfetch
     wdisplays
+    egl-wayland
+    telegram-desktop
     xfce.thunar
     xfce.thunar-volman
     xfce.thunar-archive-plugin
+    python312Packages.pip
+    kdePackages.qtwayland
+    frostix.mtkclient-git
 
     # Themes
     themechanger
@@ -95,6 +99,13 @@
     jre8 # Java 8
     zulu # Java 21
 
+  ];
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = [
+    pkgs.stdenv.cc.cc
+    pkgs.glibc
+    pkgs.libsecret
   ];
 
   environment.variables = {
@@ -125,26 +136,21 @@
   # Terminal stuff !! :D
 
   # Autologin
-  systemd.services.sway-autostart = {
-    enable = true;
-    description = "Autologin";
-    after = [ "graphical-session.target" ];
-    wantedBy = [ "default.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.uwsm}/bin/uwsm start ${pkgs.swayfx}/bin/sway";
-      User = "leah";
-      WorkingDirectory = "%h";
-      StandardInput = "tty";
-      TTYPath = "/dev/tty1";
-      TTYReset = true;
-      TTYVHangup = true;
-      TTYVTDisallocate = true;
-    };
+  #systemd.user.services.sway-autostart = {
+  #  enable = true;
+  #  description = "Autologin";
+  #  after = [ "graphical-session.target" ];
+  #  wantedBy = [ "default.target" ];
+  #  serviceConfig = {
+  #    ExecStart = "${pkgs.uwsm}/bin/uwsm start ${pkgs.swayfx}/bin/sway";
+  #  };
+  #};
+  services.getty = {
+    autologinUser = "leah";
+    autologinOnce = true;
   };
-#  services.getty = {
-#    autologinUser = "leah";
-#    autologinOnce = true;
-#  };
+
+  programs.adb.enable = true;
 
   environment.shellAliases = {
     ls = "eza --color=always --group-directories-first --icons -alg";
@@ -183,6 +189,8 @@
     extraPackages = with pkgs; [
       mako # Notification Daemon
       wofi # Application launcher
+      grim slurp # Screenshot dependencies
+      wl-clipboard # I use this all the time
     ];
     extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland
@@ -198,7 +206,8 @@
     theme = "rose-pine";
     settings = {
       main = {
-        font = "IosevkaTerm Nerd Font Mono:size=16";
+        font = "IosevkaTerm Nerd Font Mono:size=14";
+	pad = "16x16";
       };
       scrollback = {
         # 10 Million
@@ -242,6 +251,15 @@
   #
 
   services.openssh.enable = true;
+
+  #
+  # Flakes!!
+  #
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   #
   # Done !
