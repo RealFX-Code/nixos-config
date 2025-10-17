@@ -50,7 +50,7 @@
   users.users.leah = {
     isNormalUser = true;
     description = "Leah";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "plugdev" "dialout" "libvirtd" ];
     packages = with pkgs; [];
     shell = pkgs.fish;
   };
@@ -67,16 +67,26 @@
     eza
     vim
     git
+    bat
+    zip
+    tree
     btop
     wget
     p7zip
+    unzip
     floorp
+    beeper
     hyfetch
     vesktop
     git-repo
+    mangohud
+    nodejs_22
     fastfetch
     wdisplays
+    rpi-imager
+    zed-editor
     egl-wayland
+    virt-manager
     telegram-desktop
     xfce.thunar
     xfce.thunar-volman
@@ -89,7 +99,9 @@
     themechanger
     adwaita-icon-theme
     gnome-themes-extra
-    rose-pine-kvantum
+    frostix.rose-pine-kvantum
+    libsForQt5.qt5ct
+    kdePackages.qt6ct
     kdePackages.qtstyleplugin-kvantum
 
     #
@@ -99,6 +111,11 @@
     jre8 # Java 8
     zulu # Java 21
 
+  ];
+
+  # I want mtkclient to install it's udev rules
+  services.udev.packages = [
+    frostix.mtkclient-git
   ];
 
   programs.nix-ld.enable = true;
@@ -130,7 +147,7 @@
   qt = {
     enable = true;
     style = "kvantum";
-    platformTheme = "gtk2";
+    platformTheme = "qt5ct";
   };
 
   # Terminal stuff !! :D
@@ -151,6 +168,8 @@
   };
 
   programs.adb.enable = true;
+
+  programs.thunderbird.enable = true;
 
   environment.shellAliases = {
     ls = "eza --color=always --group-directories-first --icons -alg";
@@ -191,6 +210,8 @@
       wofi # Application launcher
       grim slurp # Screenshot dependencies
       wl-clipboard # I use this all the time
+      playerctl # Media keys use this internally
+      pavucontrol # Nice to have
     ];
     extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland
@@ -244,7 +265,10 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+    wireplumber.enable = true;
   };
+
+  networking.firewall.enable = false;
 
   #
   # Background services
@@ -252,19 +276,38 @@
 
   services.openssh.enable = true;
 
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+      ovmf = {
+        enable = true;
+        packages = [(pkgs.OVMF.override {
+          secureBoot = true;
+          tpmSupport = true;
+        }).fd];
+      };
+    };
+  };
+
   #
-  # Flakes!!
+  # Nix stuff
   #
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 15d";
+    };
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
 
-  #
-  # Done !
-  #
-
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.05";
 
 }
