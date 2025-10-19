@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760731267,
-        "narHash": "sha256-I9K4ahhZkmwvEd17t965p6G+zNHSyF4fvrImDLnxkNU=",
+        "lastModified": 1760839283,
+        "narHash": "sha256-Lt7/L6BfwZoU2hGfXpoRYq78UZcHLfj5EXL4D4PVpCw=",
         "owner": "shomykohai",
         "repo": "frostix",
-        "rev": "65f16f8879e149a48ff6be60e159a4d89f12a33c",
+        "rev": "b0aae7b4e99d8fd48031d016fac79f6f63ae7815",
         "type": "github"
       },
       "original": {
@@ -21,22 +21,6 @@
       }
     },
     "nixpkgs": {
-      "locked": {
-        "lastModified": 1760580664,
-        "narHash": "sha256-/YdfibIrnqXAL8p5kqCU345mzpHoOtuVIkMiI2pF4Dc=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "98ff3f9af2684f6136c24beef08f5e2033fc5389",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-25.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgsUnstable": {
       "locked": {
         "lastModified": 1760524057,
         "narHash": "sha256-EVAqOteLBFmd7pKkb0+FIUyzTF61VKi7YmvP1tw4nEw=",
@@ -55,8 +39,7 @@
     "root": {
       "inputs": {
         "frostix": "frostix",
-        "nixpkgs": "nixpkgs",
-        "nixpkgsUnstable": "nixpkgsUnstable"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

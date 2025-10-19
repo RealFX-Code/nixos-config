@@ -74,19 +74,21 @@
     wget
     p7zip
     unzip
-    floorp
     beeper
     hyfetch
     vesktop
     git-repo
     mangohud
+    python313
     nodejs_22
     fastfetch
     wdisplays
+    floorp-bin
     rpi-imager
     zed-editor
     egl-wayland
     virt-manager
+    gnome-boxes
     telegram-desktop
     xfce.thunar
     xfce.thunar-volman
@@ -282,13 +284,6 @@
       package = pkgs.qemu_kvm;
       runAsRoot = true;
       swtpm.enable = true;
-      ovmf = {
-        enable = true;
-        packages = [(pkgs.OVMF.override {
-          secureBoot = true;
-          tpmSupport = true;
-        }).fd];
-      };
     };
   };
 
