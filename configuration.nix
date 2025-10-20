@@ -87,8 +87,9 @@
     rpi-imager
     zed-editor
     egl-wayland
-    virt-manager
     gnome-boxes
+    virt-manager
+    wireguard-tools
     telegram-desktop
     xfce.thunar
     xfce.thunar-volman
@@ -271,6 +272,7 @@
   };
 
   networking.firewall.enable = false;
+  networking.wireguard.enable = true;
 
   #
   # Background services
