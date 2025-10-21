@@ -63,56 +63,76 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+
+    #
+    # Terminal apps
+    #
+
     gh
     eza
     vim
     git
     bat
     zip
+    grim
     tree
     btop
     wget
+    slurp
     p7zip
     unzip
-    beeper
     hyfetch
-    vesktop
-    git-repo
-    mangohud
+    git-repo # Repo for AOSP
+    playerctl
     python313
     nodejs_22
     fastfetch
+    wl-clipboard
+    wireguard-tools
+    python312Packages.pip
+    frostix.mtkclient-git
+
+    #
+    # Gui Apps
+    #
+
+    mako
+    wofi
+    beeper
+    vesktop
     wdisplays
     floorp-bin
     rpi-imager
     zed-editor
-    egl-wayland
     gnome-boxes
     virt-manager
-    wireguard-tools
-    telegram-desktop
     xfce.thunar
-    xfce.thunar-volman
-    xfce.thunar-archive-plugin
-    python312Packages.pip
-    kdePackages.qtwayland
-    frostix.mtkclient-git
-
-    # Themes
+    pavucontrol
     themechanger
-    adwaita-icon-theme
-    gnome-themes-extra
-    frostix.rose-pine-kvantum
+    telegram-desktop
+
+    #
+    # Gui Libs
+    #
+
+    egl-wayland
     libsForQt5.qt5ct
     kdePackages.qt6ct
+    adwaita-icon-theme
+    gnome-themes-extra
+    xfce.thunar-volman
+    kdePackages.qtwayland
+    frostix.rose-pine-kvantum
+    xfce.thunar-archive-plugin
     kdePackages.qtstyleplugin-kvantum
 
     #
     # Games
     #
-    prismlauncher
     jre8 # Java 8
     zulu # Java 21
+    mangohud
+    prismlauncher
 
   ];
 
@@ -208,21 +228,13 @@
       gtk = true;
     };
     package = pkgs.swayfx; # SwayFX ftw
-    extraPackages = with pkgs; [
-      mako # Notification Daemon
-      wofi # Application launcher
-      grim slurp # Screenshot dependencies
-      wl-clipboard # I use this all the time
-      playerctl # Media keys use this internally
-      pavucontrol # Nice to have
-    ];
     extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland
       export QT_QPA_PLATFORM=wayland-egl
       export _JAVA_AWT_WM_NONREPARENTING=1
     '';
   };
-  
+
   programs.waybar.enable = true;
 
   programs.foot = {
