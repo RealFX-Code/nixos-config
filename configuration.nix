@@ -50,7 +50,7 @@
   users.users.leah = {
     isNormalUser = true;
     description = "Leah";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "plugdev" "dialout" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "plugdev" "dialout" "libvirtd" "docker" ];
     packages = with pkgs; [];
     shell = pkgs.fish;
   };
@@ -69,11 +69,14 @@
     #
 
     gh
+    lz4
     eza
     vim
     git
     bat
     zip
+    edl
+    file
     grim
     tree
     btop
@@ -81,14 +84,19 @@
     slurp
     p7zip
     unzip
+    screen
     hyfetch
+    openssl
+    heimdall
     git-repo # Repo for AOSP
     playerctl
     python313
     nodejs_22
     fastfetch
     wl-clipboard
+    frostix.odin4
     wireguard-tools
+    multipath-tools
     python312Packages.pip
     frostix.mtkclient-git
 
@@ -96,19 +104,25 @@
     # Gui Apps
     #
 
+    mpv
     mako
     wofi
+    ghex
     beeper
     vesktop
+    bottles
     wdisplays
+    audacious
     floorp-bin
-    rpi-imager
+#    rpi-imager
     zed-editor
+    obs-studio
     gnome-boxes
     virt-manager
     xfce.thunar
     pavucontrol
     themechanger
+    audacious-plugins
     telegram-desktop
 
     #
@@ -243,7 +257,7 @@
     settings = {
       main = {
         font = "IosevkaTerm Nerd Font Mono:size=14";
-	pad = "16x16";
+        pad = "16x16";
       };
       scrollback = {
         # 10 Million
@@ -292,12 +306,18 @@
 
   services.openssh.enable = true;
 
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu = {
-      package = pkgs.qemu_kvm;
-      runAsRoot = true;
-      swtpm.enable = true;
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+        swtpm.enable = true;
+      };
+    };
+    docker = {
+      enable = true;
+      enableOnBoot = true;
     };
   };
 
