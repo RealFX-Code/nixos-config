@@ -50,7 +50,7 @@
   users.users.leah = {
     isNormalUser = true;
     description = "Leah";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "plugdev" "dialout" "libvirtd" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "plugdev" "dialout" "libvirtd" "docker" "audio"];
     packages = with pkgs; [];
     shell = pkgs.fish;
   };
@@ -84,9 +84,11 @@
     slurp
     p7zip
     unzip
+    psmisc
     screen
     hyfetch
     openssl
+    usbutils
     heimdall
     git-repo # Repo for AOSP
     playerctl
@@ -111,16 +113,19 @@
     beeper
     vesktop
     bottles
+    cardinal
     wdisplays
     audacious
+    vscode-fhs
     floorp-bin
 #    rpi-imager
     zed-editor
     obs-studio
     gnome-boxes
-    virt-manager
     xfce.thunar
     pavucontrol
+    qbittorrent
+    virt-manager
     themechanger
     audacious-plugins
     telegram-desktop
@@ -155,12 +160,21 @@
     frostix.mtkclient-git
   ];
 
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTR{idVendor}=="1235", ATTR{idProduct}=="0035", MODE="0666"
+  '';
+
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = [
     pkgs.stdenv.cc.cc
     pkgs.glibc
     pkgs.libsecret
   ];
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
 
   environment.variables = {
     GTK_THEME = "Adwaita:dark";
