@@ -86,6 +86,7 @@
     unzip
     psmisc
     screen
+    sshpass
     hyfetch
     openssl
     usbutils
@@ -116,6 +117,7 @@
     cardinal
     wdisplays
     audacious
+    ghidra-bin
     vscode-fhs
     floorp-bin
 #    rpi-imager
@@ -127,13 +129,16 @@
     qbittorrent
     virt-manager
     themechanger
-    audacious-plugins
     telegram-desktop
+    audacious-plugins
+    ghidra-extensions.lightkeeper
+    ghidra-extensions.machinelearning
 
     #
     # Gui Libs
     #
 
+    libnotify
     egl-wayland
     libsForQt5.qt5ct
     kdePackages.qt6ct
