@@ -224,8 +224,6 @@
 
   environment.shellAliases = {
     ls = "eza --color=always --group-directories-first --icons -alg";
-    # Temporary alias to "hot-reload" nixos from my test machine
-    updatenix = "wget http://192.168.1.14:3000/configuration.nix; sudo mv configuration.nix /etc/nixos/configuration.nix";
   };
 
   programs.fish = {
