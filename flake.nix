@@ -9,13 +9,13 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: 
+  outputs = { self, nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
       frostix = inputs.frostix.packages.${system};
     in
-    {    
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    {
+      nixosConfigurations."LixOS" = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs frostix;};
       modules = [
         ./configuration.nix
@@ -23,4 +23,3 @@
     };
   };
 }
-
