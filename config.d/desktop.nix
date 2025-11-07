@@ -130,6 +130,7 @@
     xfce.thunar
     pavucontrol
     qbittorrent
+    arduino-ide
     virt-manager
     themechanger
     telegram-desktop
