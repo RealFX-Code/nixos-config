@@ -38,6 +38,13 @@
     variant = "";
   };
 
+  # Ram compression
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 65; # (65%)
+  };
+
   programs.nix-ld.enable = true;
   #programs.nix-ld.libraries = [
   #  pkgs.glibc

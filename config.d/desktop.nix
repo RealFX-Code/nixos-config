@@ -51,6 +51,9 @@
 
   services.gvfs.enable = true;
 
+  # For thumbnails in Thunar
+  services.tumbler.enable = true;
+
   # Soteria is a polkit agent
   security.soteria.enable = true;
 
@@ -117,22 +120,26 @@
     beeper
     vesktop
     bottles
+    remmina
     cardinal
     wdisplays
     audacious
     ghidra-bin
     vscode-fhs
     floorp-bin
-#    rpi-imager
+    rpi-imager
     zed-editor
     obs-studio
+    blender-hip
     gnome-boxes
     xfce.thunar
     pavucontrol
     qbittorrent
     arduino-ide
+    lunar-client
     virt-manager
     themechanger
+    universal-ctags
     telegram-desktop
     audacious-plugins
     ghidra-extensions.lightkeeper

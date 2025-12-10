@@ -45,17 +45,21 @@
     sshpass
     hyfetch
     openssl
+    git-lfs
     usbutils
     heimdall
     git-repo # Repo for AOSP
+    inetutils
     playerctl
     python313
     nodejs_22
     fastfetch
+    btrfs-progs
     wl-clipboard
     frostix.odin4
     wireguard-tools
     multipath-tools
+    frostix.magiskboot
     python312Packages.pip
     frostix.mtkclient-git
   ];
